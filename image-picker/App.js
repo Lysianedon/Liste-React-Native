@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
 export default function App() {
@@ -33,45 +33,103 @@ export default function App() {
   if (selectedImage !== null) {
     return (
       <View style={styles.container}>
-        <Image
-          source={{ uri: selectedImage.localUri }}
-          style={styles.thumbnail}
-        />
+          <ImageBackground source={require('./img/phone.png')} resizeMode="cover" style={styles.background}>
+            <Text>INSTAFRESH</Text>
+            <View style={styles.circle}>
+
+            <Image
+              source={{ uri: selectedImage.localUri }}
+              style={styles.thumbnail}
+              />
+              <Text>Looks good !</Text>
+            </View>
+        </ImageBackground>
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
-      <Text>APP</Text>
-      <Image source={{ uri: 'https://i.imgur.com/TkIrScD.png' }} style={styles.logo} />
-      <Text>
-        To share a photo from your phone with a friend, just press the button below!
-      </Text>
+      <ImageBackground source={require('./img/phone.png')} resizeMode="cover" style={styles.background}>
+       <Text style={styles.texts, styles.nameAppli}>INSTAFRESH</Text>
 
-      <TouchableOpacity onPress={openImagePickerAsync}>
-        <Text>Pick a photo</Text>
+       <View style={styles.circle}></View>
+
+      <TouchableOpacity style={styles.button} onPress={openImagePickerAsync}>
+        <Text  style={styles.texts, styles.textButton}>Pick a photo</Text>
       </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
+    // flex: 1,
+    display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent : 'center',
+    position: 'relative',
   },
 
-  logo : {
-    width: 100,
-    height: 100,
+  circle : {
+    width: "40%",
+    height: "20%",
+    borderRadius: "50%",
+    border: "1px solid black",
+    marginHorizontal: "auto",
   },
+
+  texts : {
+    position: 'absolute',
+    // marginVertical: 130,
+
+  },
+
+  textButton : {
+    fontSize: 18,
+    color: "#fff",
+    fontWeight: "bold",
+    alignSelf: "center",
+  },
+
+  button : {
+    border: 'solid 1px black',
+    width: "40%",
+   left : "30%",
+   top: "10%",
+   backgroundColor: "#009688",
+   borderRadius: 10,
+   paddingVertical: 10,
+   paddingHorizontal: 12,
+  },
+
+  nameAppli : {
+    marginTop: 190,
+    marginBottom: 60,
+    marginHorizontal: 120,
+    fontSize: "1.5em",
+    fontWeight: 'bold',
+    color: "#009688",
+    left : "20%",
+    top: "70%",
+  },
+
   thumbnail: {
-    width: 300,
-    height: 300,
-    resizeMode: "contain"
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
+    maxWidth: "100%",
+    maxHeight: "100%", 
   },
+
+  background: {
+
+    // backgroundSize : 190,
+    backgroundPosition : 'cover',
+    height: "100vh",
+    width: "100%",
+  }
 
 });
