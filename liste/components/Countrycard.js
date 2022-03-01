@@ -6,12 +6,12 @@ export default function Countrycard(props) {
   return (
     <View style={StyleSheet.container}>
         <Text>Country: {props.country.name.common}</Text>
-        {/* <Text>Capital: {props.country.name.common}</Text> */}
+
+        {
+            props.country.hasOwnProperty('capital') ? ( <Text>Capital : {props.country.capital[0]}</Text>) : (null)
+        }
+
         <Image style={styles.img} source={{uri : props.country.flags.png}}/>
-        
-        {/* {
-            props.country.capital[0] === undefined ? ( <Text>Capital : {props.country.capital[0]}</Text>) : (null)
-        } */}
 
     </View>
   )
@@ -26,10 +26,14 @@ const styles = StyleSheet.create({
         borderTop: 1,
         marginBottom: 5,
         display: 'flex',
+        flexDirection: 'row',
+        flex: 1,
     },
 
     img : {
         width: 50,
         height: 50,
+        marginVertical: "15",
+        marginHorizontal: 'auto',
     }
 })
