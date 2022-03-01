@@ -39,7 +39,6 @@ export default function List() {
               <View style={ styles.separator}></View>
           )}
           />
-
           
           <ActivityIndicator size="large" color="#00ff00" animating={loading}/>
 
