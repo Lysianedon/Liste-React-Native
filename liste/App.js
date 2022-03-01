@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import List from './components/List';
 
 export default function App() {
+
   return (
     <View style={styles.container}>
       <Text style={styles.texts}>LIST OF COUNTRIES: </Text>
