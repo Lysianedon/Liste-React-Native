@@ -7,13 +7,55 @@ export default function App() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [logText, setLogText] = useState("LOGIN")
+  const [username, setUsername] = useState({
+    name : "",
+    isDisplayed : "none",
+  })
+
+  const handleClick = () => {
+    if (password.length >= 6 && email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) && username.name.length > 1) {
+      setLogText("LOG OFF")
+      setUsername( {
+        name : username.name,
+        isDisplayed : "block",
+      })
+  
+    }else {
+
+      alert('Error : fill the fields properly.')
+      setUsername( {
+        name : username.name,
+        isDisplayed : "none",
+      })
+
+      setLogText("LOGIN");
+
+      return;
+    }
+
+  }
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={{display: username.isDisplayed}}>HELLO, {username.name}  ! </Text>
       <Text style={styles.title}>KONEXIO </Text>
       {/* LOGO */}
       <Image style={styles.img}  source={require('./assets/logoform.png')}/>
 
+     {/* USERNAME */}
+
+     <View style={styles.inputView}>
+          <TextInput
+          style={styles.TextInput}
+          placeholder="Your name"
+          placeholderTextColor="#003f5c"
+          onChangeText={(username) => setUsername({
+            name : username,
+            isDisplayed : "none",
+          })}
+          />
+      </View>
 
     {/* EMAIL INPUT */}
     {
@@ -65,11 +107,9 @@ export default function App() {
     
         }
 
-      <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
+      <TouchableOpacity style={styles.loginBtn} onPress={handleClick}>
+      <Text style={styles.loginText}>{logText}</Text> 
       </TouchableOpacity>
-
-
 
     </SafeAreaView>
   );
@@ -91,6 +131,7 @@ const styles = StyleSheet.create({
   title : {
     fontSize: 40,
     marginBottom: 45,
+    fontWeight: "bold",
   },
 
   img: {
@@ -137,7 +178,6 @@ const styles = StyleSheet.create({
     borderRightWidth: 3,
     borderTopWidth: 2,
     borderBottomWidth: 2,
-
   },
   
   TextInput: {
