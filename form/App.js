@@ -10,29 +10,60 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>KONEXIO </Text>
       {/* LOGO */}
       <Image style={styles.img}  source={require('./assets/logoform.png')}/>
 
-      {/* EMAIL INPUT */}
-      <View style={styles.inputView}>
-        <TextInput
-        style={styles.TextInput}
-        placeholder="Your email"
-        placeholderTextColor="#003f5c"
-        onChangeText={(email) => setEmail(email)}
-        />
-      </View>
+
+    {/* EMAIL INPUT */}
+    {
+      email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) ? 
+
+      ( <View style={styles.inputViewSuccess}>
+          <TextInput
+          style={styles.TextInput}
+          placeholder="Your email"
+          placeholderTextColor="#003f5c"
+          onChangeText={(email) => setEmail(email)}
+          />
+      </View>)
+      :
+      ( <View style={styles.inputView}>
+          <TextInput
+          style={styles.TextInput}
+          placeholder="Your email"
+          placeholderTextColor="#003f5c"
+          onChangeText={(email) => setEmail(email)}
+          />
+      </View>)
+    }
 
       {/* PASSWORD INPUT */}
-      <View style={styles.inputView}>
-      <TextInput
-        style={styles.TextInput}
-        placeholder="Your password"
-        placeholderTextColor="#003f5c"
-        secureTextEntry={true}
-        onChangeText={(password) => setPassword(password)}
-        />
-      </View>
+      {
+          password.length >= 6 ?
+
+          ( <View style={styles.inputViewSuccess}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Your password"
+              placeholderTextColor="#003f5c"
+              secureTextEntry={true}
+              onChangeText={(password) => setPassword(password)}
+              />
+            </View>)
+            :
+
+            (<View style={styles.inputView}>
+              <TextInput
+                style={styles.TextInput}
+                placeholder="Your password"
+                placeholderTextColor="#003f5c"
+                secureTextEntry={true}
+                onChangeText={(password) => setPassword(password)}
+                />
+              </View>)
+    
+        }
 
       <TouchableOpacity style={styles.loginBtn}>
         <Text style={styles.loginText}>LOGIN</Text>
@@ -50,7 +81,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    borderLeftWidth : 11,
+    borderRightWidth : 11,
+    borderTopWidth : 10,
+    borderBottomWidth : 10,
+    borderRadius: 10,
 
+  },
+  title : {
+    fontSize: 40,
+    marginBottom: 45,
   },
 
   img: {
@@ -59,26 +99,52 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
 
-  inputView: {
-    // backgroundColor: "#FFC0CB",
-    borderColor: "black",
+  inputView : {
     borderRadius: 30,
     width: "70%",
     height: 45,
     marginBottom: 20,
     alignItems: "center",
     borderColor: "black",
-    borderLeftWidth: 4,
-    borderRightWidth: 4,
+    borderLeftWidth: 3,
+    borderRightWidth: 3,
     borderTopWidth: 2,
     borderBottomWidth: 2,
+  },
+
+  inputViewError : {
+    borderColor: "red",
+    borderRadius: 30,
+    width: "70%",
+    height: 45,
+    marginBottom: 20,
+    alignItems: "center",
+    borderLeftWidth: 3,
+    borderRightWidth: 3,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+
+  },
+
+  inputViewSuccess : {
+    borderColor: "green",
+    borderRadius: 30,
+    width: "70%",
+    height: 45,
+    marginBottom: 20,
+    alignItems: "center",
+    borderLeftWidth: 3,
+    borderRightWidth: 3,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+
   },
   
   TextInput: {
     height: 50,
     flex: 1,
     padding: 10,
-    marginLeft: 20,
+    marginLeft: 5,
   },
 
   loginBtn:
